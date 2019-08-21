@@ -1,8 +1,0 @@
-function wait(x) {
-	if (x > 0)
-		return new Promise(f => {setTimeout(() => {f();}, x * 1000);});
-}
-
-var sleep = {
-	post: 3
-};
