@@ -1,0 +1,75 @@
+HTMLFormElement.prototype.getData = function(all = false) {
+	var res = [];
+	for (var el of this.elements)
+		if (all || el.value !== '')
+			res.push(encodeURIComponent(el.name) + "=" + encodeURIComponent(el.value));
+	return res.join("&");
+};
+
+function AJAXRequest() {
+	if (this.getAttribute("disabled") !== null)
+		return false;
+
+	var async = true;
+	if (this.getAttribute("ajax-sync") !== null)
+		async = false;
+
+	xhr = new XMLHttpRequest();
+
+	if (this.localName === "form") {
+		xhr.open("POST", this.action, async);
+		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(this.getData());
+	} else if (this.href) {
+		xhr.open("GET", this.href, async);
+		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+		xhr.send();
+	} else {
+		console.error("Error: undefined \"href\" attribute!");
+		return false;
+	}
+
+	xhr.target = this;
+
+	try {
+		if (this.ajaxBefore)
+			this.ajaxBefore(xhr);
+	} catch (e) {
+		console.error("Error! " + e);
+	}
+
+	xhr.onreadystatechange = function() {
+		if (this.readyState != 4)
+			return;
+		if (this.status == 200) {
+			console.info("Done! " + this.responseURL);
+			try {
+				this.responseJSON = JSON.parse(this.responseText);
+			} catch (e) {
+				this.responseJSON = null;
+			}
+			try {
+				if (this.target.ajaxCallback)
+					this.target.ajaxCallback(this);
+			} catch (e) {
+				console.error("Error! " + e);
+			}
+		} else
+			console.error("Error! status: " + this.status);
+	}
+	if (!async)
+		xhr.onreadystatechange();
+	return false;
+}
+
+window.addEventListener("load", function() {
+	for (var el of document.querySelectorAll("[ajax]")) {
+		if (el.localName === "form")
+			el.onsubmit = AJAXRequest;
+		else
+			el.onclick = AJAXRequest;
+		el.ajaxBefore = window[el.getAttribute("ajax-before")] || null;
+		el.ajaxCallback = window[el.getAttribute("ajax-callback")] || null;
+	}
+});

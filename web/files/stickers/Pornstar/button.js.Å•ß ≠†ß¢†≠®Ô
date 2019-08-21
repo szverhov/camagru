@@ -1,0 +1,16 @@
+HTMLAnchorElement.prototype.setDisabled = function($disabled) {
+	if ($disabled) {
+		this.setAttribute("disabled", null);
+		this._href = this.href;
+		this.removeAttribute("href");
+	} else {
+		this.removeAttribute("disabled");
+		this.href = this._href;
+	}
+};
+
+window.addEventListener("load", function() {
+	for (var el of document.querySelectorAll("a[disabled]")) {
+		el.setDisabled(true);
+	}
+});

@@ -1,0 +1,202 @@
+var stikersAry = [
+	// {name: "Borat", last: "https://s.tcdn.co/8d7/6f1/8d76f159-6795-37fd-8c64-04e195af9c61/44.png"},
+	// {name: "Game of Thrones", last: "https://s.tcdn.co/2e3/0e0/2e30e07d-0b4d-3a93-87b3-b81fd42d41e1/54.png"},
+	// {name: "Sparks", last: "https://s.tcdn.co/f40/2cf/f402cf98-b311-3eb3-af17-6c5fcca01545/24.png"},
+	// {name: "Sponge Bob", last: "https://s.tcdn.co/4ed/ccf/4edccf0f-e415-3d52-92c7-f8a9a3b114a0/21.png"},
+	// {name: "Pepe", last: "https://s.tcdn.co/4dd/300/4dd300fd-0a89-3f3d-ac53-8ec93976495e/120.png"},
+	// {name: "Pornstar", last: "https://s.tcdn.co/7c1/9d4/7c19d4f0-978b-3c2f-ac5c-e2a4297d108d/25.png"},
+	// {name: "Internet Addiction", last: "https://s.tcdn.co/93f/ccc/93fccc42-f8fb-31f1-af68-f920a82e50a8/26.png"},
+	// {name: "Pappi", last: "https://s.tcdn.co/5ba/fb7/5bafb75c-6bee-39e0-a4f3-a23e523feded/48.png"},
+	// {name: "Fluffy", last: "https://s.tcdn.co/0c3/881/0c3881cb-8ff1-3753-8851-2dde90086e2d/24.png"},
+	{name: "Miu Meow", last: "https://s.tcdn.co/fbe/c69/fbec698e-1224-4da3-b399-8d09cc6ce38e/48.png"},
+	// {name: "Waddles", last: "https://s.tcdn.co/182/af4/182af458-864d-3756-9525-c4bbe46f7426/25.png"},
+];
+
+function addStiker(stikersAry) {
+	function addStikerPack(name, srcs) {
+		var span = document.createElement("span");
+		span.innerHTML = name;
+		id("stikers").appendChild(span);
+
+		var stikersRow = document.createElement("div");
+		stikersRow.addClassName("stikers_row");
+		stikersRow.addClassName("scrollbar");
+		for (var src of srcs) {
+			var img = document.createElement("img");
+			img.addClassName("stiker");
+			img.src = src;
+			img.onclick = stikerSelector;
+			stikersRow.appendChild(img);
+		}
+		id("stikers").appendChild(stikersRow);
+	}
+
+	for (var el of stikersAry) {
+		var ary = [];
+		var match = el.last.match(/(.*?)(\d+)\.png/);
+		var src = match[1];
+		match[2] = +match[2];
+		for (var i = 1; i <= match[2]; i++)
+			ary.push(src + i + ".png");
+		addStikerPack(el.name, ary);
+	}
+}
+
+id("stikers_x").onclick = function() {
+	id("stikers_w").style.display = "none";
+};
+
+id("stikers_w").onclick = function(e) {
+	if (!e.target.matches("img.stiker"))
+		return;
+
+	id("stikers_x").onclick();
+};
+
+function hideWebcan(i) {
+	if (i) {
+		id("video").pause();
+		id("webcam").addClassName("hide");
+		id("main_photo").removeClassName("hide");
+
+		id("snapshot_btn").removeClassName("pink");
+		id("share_btn").addClassName("pink");
+		id("share_btn").removeClassName("disabled");
+		id("stiker_btn").removeClassName("disabled");
+		id("download_btn").removeClassName("disabled");
+	} else {
+		id("video").play();
+		id("webcam").removeClassName("hide");
+		id("main_photo").addClassName("hide");
+
+		id("snapshot_btn").addClassName("pink");
+		id("share_btn").removeClassName("pink");
+		id("share_btn").addClassName("disabled");
+		id("stiker_btn").addClassName("disabled");
+		id("download_btn").addClassName("disabled");
+	}
+}
+
+
+
+id("photos").addEventListener("click", e => {
+	if (!e.target.matches("canvas.photo"))
+		return;
+
+	revisionSetData(e.target);
+});
+
+function revisionSetData(src) {
+	hideWebcan(1);
+	id("revision").width = src.width;
+	id("revision").height = src.height;
+
+	id("revision").getContext("2d").drawImage(src, 0, 0, src.width, src.height);
+}
+
+id("snapshot_btn").onclick = function() {
+	if (this.containsClassName("disabled"))
+		return;
+
+	if (id("webcam").containsClassName("hide"))
+		hideWebcan(0);
+	else {
+		var canvas = document.createElement("canvas").addClassName("photo");
+
+		canvas.width = id("video").videoWidth;
+		canvas.height = id("video").videoHeight;
+
+		canvas.getContext("2d").drawImage(id("video"), 0, 0, id("video").videoWidth, id("video").videoHeight);
+		id("photos").appendChild(canvas);
+		canvas.scrollIntoView();
+	}
+};
+
+id("upload_btn").onclick = function() {
+	if (this.containsClassName("disabled"))
+		return;
+
+	var input = document.createElement("input").setAttributes({
+		type: "file",
+		name: "photo",
+		accept: "image/*"
+	});
+	input.onchange = function() {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var img = new Image();
+			img.onload = function() {
+				revisionSetData(this);
+			};
+			img.src = this.result;
+		};
+		reader.readAsDataURL(this.files[0]);
+	};
+	input.click();
+};
+
+function applyStikers() {
+	for (var stiker of id("place").querySelectorAll("div.stiker_w")) {
+		var width = id("revision").width / id("revision").clientWidth;
+		var height = id("revision").height / id("revision").clientHeight;
+		var tmp = document.createElement("canvas").setParams({
+			width: stiker.clientWidth,
+			height: stiker.clientHeight
+		});
+		tmp.getContext("2d").drawImage(stiker.firstChild, 0, 0, tmp.width, tmp.height);
+ 		id("revision").getContext("2d").putImageData(tmp.getContext("2d").getImageData(0, 0, tmp.width, tmp.height), 10, 70);
+		// id("revision").getContext("2d").drawImage(tmp, width * stiker.offsetLeft, height * stiker.offsetTop, width * stiker.clientWidth, height * stiker.clientHeight);
+	}
+	// id("revision").getContext("2d").save();
+}
+
+id("share_btn").onclick = function() {
+	if (this.containsClassName("disabled"))
+		return;
+
+	applyStikers();
+	var imageFile = id("revision").toDataURL("image/png");
+	imageFile = imageFile.replace("data:image/png;base64,", "");
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST',"/users/make-photo", true);
+	xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+	xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	xhr.send("photo=" + encodeURIComponent(imageFile));
+	xhr.onreadystatechange = function() {
+		if (this.readyState != 4)
+			return;
+		if (this.status == 200) {
+			console.info("Done! " + this.responseURL);
+			try {
+				var req = JSON.parse(this.responseText);
+				if (req.error)
+					console.log(e);
+				else if (req.location)
+					window.location.href = req.location;
+
+			} catch (e) {console.log(e)}
+		} else
+			console.error("Error! status: " + this.status);
+	}
+};
+
+id("stiker_btn").onclick = function() {
+	if (this.containsClassName("disabled"))
+		return;
+
+	id("stikers_w").style.display = "block";
+	if (!id("stikers").children.length)
+		addStiker(stikersAry);
+};
+
+id("download_btn").onclick = function() {
+	if (this.containsClassName("disabled"))
+		return;
+
+	applyStikers();
+	// var a = document.createElement("a").setAttributes({
+	// 	href: id("revision").toDataURL('image/png'),
+	// 	download: "snapshot.png"
+	// }).click();
+};
+addStiker(stikersAry);

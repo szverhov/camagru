@@ -1,0 +1,24 @@
+function isInt(n) {
+	return n % 1 === 0;
+}
+
+
+function function_name(w, h = 0) {
+	var a = h / w;
+	if (!h) {}
+		a = 3 / 4;
+	for (; w; w--) {
+		if (isInt(w * a)) {
+			console.log(w, w * a);
+		}
+	}
+}
+
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+	// Not adding `{ audio: true }` since we only want video now
+	navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+		//id("video").src = window.URL.createObjectURL(stream);
+		id("video").srcObject = stream;
+		id("video").play();
+	});
+}

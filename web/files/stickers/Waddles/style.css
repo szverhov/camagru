@@ -1,0 +1,143 @@
+@font-face {
+	font-family: Rosalinda;
+	src: url(/src/15556.ttf);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-weight: 400;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+
+/*	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	-webkit-user-select: none;*/
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+b {
+	font-weight: 600;
+}
+
+strong, h1 {
+	font-weight: 1000;
+}
+
+html {
+	height: 100%;
+	background-color: #fafafa;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+section {
+	margin: 0 auto;
+	width: 980px;
+	min-width: 980px;
+	/*background-color: rgba(0,255,0,.1);*/
+	display: block;
+}
+
+main {
+	margin-top: 100px;
+	flex: 1;
+}
+
+/********/
+/*header*/
+/********/
+
+header {
+	background-color: white;
+	border-bottom: 1px solid #aaaaaa;
+	width: 100%;
+	position: fixed;
+	z-index: 999;
+}
+
+.header_wrapper {
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header .logo_text, header .fas {
+	font-size: 30px;
+	font-weight: 600;
+	margin: 0 10px;
+}
+
+header .logo_text {
+	font-family: Rosalinda;
+	text-transform: capitalize;
+}
+
+header .logo_text:before {
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	margin-right: 5px;
+	content: '\f083';
+	font-size: 1.2em;
+	margin-right: .5em;
+}
+
+/********/
+/*footer*/
+/********/
+
+footer {
+	display: flex;
+	justify-content: center;
+	/*background-color: rgba(0,0,255,.5);*/
+	width: 100%;
+	z-index: 999;
+}
+
+.footer_wrapper {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+footer .copy {
+	text-transform: uppercase;
+	color: #888;
+	font-weight: 600;
+	font-size: 12px;
+}
+
+/********/
+/********/
+/********/
+
+
+.avatar {
+	border-radius: 10%;
+
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+img.photo {
+	display: block;
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+}

@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !^/(web)
+
+RewriteRule ^files/(.*)$ web/files/$1 [L]
+RewriteRule ^css/(.*)$ web/css/$1 [L]
+RewriteRule ^js/(.*)$ web/js/$1 [L]
+
+RewriteRule . index.php
+
+

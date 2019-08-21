@@ -1,0 +1,19 @@
+{
+    "name": "pagri_000/cms_lessons",
+    "authors": [
+        {
+            "name": "IKPAKEHI",
+            "email": "pagrio@bigmir.net"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^6.0"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"Engine\\": "engine",
+            "Front\\": "front",
+    		"Engine\\DI\\": "engine/DI"
+    	}
+    }
+}
