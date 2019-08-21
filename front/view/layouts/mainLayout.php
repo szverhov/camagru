@@ -60,14 +60,13 @@
 	</div>
 
 	<div class="w3-padding-large" id="main">
-		<header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+<!-- 		<header class="w3-container w3-padding-32 w3-center w3-black" id="home">
 			<h1 class="w3-jumbo"><span class="w3-hide-small">Camagru</span></h1>
-		<!-- <p>Some text</p> -->
-		</header>
+		</header> -->
 	<?php
 		if (isset($mainMessage))
 			echo($mainMessage);
-		include $body
+		include $body;
 	?>
 	<!--     <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
 	<p class="w3-medium">Powered by szverhov</a></p>
@@ -93,31 +92,4 @@
 		}
 	}
 
-	// function userLogin()
-	// {
-	// 	// var xhr = new XMLHttpRequest();
-	// 	// var body = 'name=' + encodeURIComponent('name') +
-	// 	//   '&surname=' + encodeURIComponent('surname');
-	// 	// xhr.open("POST", '/user/sign-in', true);
-	// 	// xhr.setRequestHeader('Content-Type', 'multipart/form-data;');
-	// 	// // xhr.onreadystatechange = ...;
-	// 	// xhr.send(body);
-
-	// 	var http = new XMLHttpRequest();
-	// 	var url = '/user/sign-in';
-	// 	var params = 'orem=ipsum&name=binny';
-	// 	http.open('POST', url, true);
-
-	// 	//Send the proper header information along with the request
-	// 	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-	// 	http.onreadystatechange = function() {//Call a function when the state changes.
-	// 	    if(http.readyState == 4 && http.status == 200) {
-	// 	        alert(http.responseText);
-	// 	    }
-	// 	}
-	// 	http.send(params);
-
-
-	// }
 </script>

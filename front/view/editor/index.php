@@ -17,14 +17,12 @@
 
 <div id='editorBlock'>
 	<div id='videoBlock'>
-			<video id="video" autoplay muted></video>
-		    <div id="dragContainer">
-			</div>
+		<video id="video" autoplay muted></video>
+	    <div id="dragContainer"></div>
 		<button id="snap" disabled class='disabledButton'>Disabled (While no stickers selected)</button>
 		<button class='myButton' onclick="showHideStickers()">Select Sticker</button>
-		<input id="f02"  type="file" placeholder="Add profile picture" />
-		<label for="f02">Add profile picture</label>
-
+		<input id="f02"   type="file" placeholder="Add profile picture" />
+		<label id="f02Label" class="myButton" for="f02">Load your own picture</label>
 	</div>
 	<div id='capturedCanvasBlock'></div>
 

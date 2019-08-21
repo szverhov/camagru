@@ -1,4 +1,5 @@
 #editorBlock {
+	/*top: 100px;*/
 	min-height: 800px;
 	display: flex;
 	flex-direction: row;
@@ -9,6 +10,7 @@
 }
 
 #videoBlock {
+	border-radius: 5px;
 	min-height: 500px;
 	min-width: 650px;
 	display: flex;
@@ -23,6 +25,7 @@
 }
 
 #dragContainer {
+	border-radius: 5px;
 	width: 640px;
 	height: 480px;
 	background-color: #333;
