@@ -1,0 +1,54 @@
+#editorBlock {
+	min-height: 800px;
+	display: flex;
+	flex-direction: row;
+}
+
+#editorBlock * {
+	margin: 5px;
+}
+
+#videoBlock {
+	min-height: 500px;
+	min-width: 650px;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+#video {
+	width: 640px;
+	height: 480px;
+	z-index: 1;
+}
+
+#dragContainer {
+	width: 640px;
+	height: 480px;
+	background-color: #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	touch-action: none;
+	position: absolute;
+}
+
+.conteinerItem {
+	height: 100px;
+	z-index: 2;
+	position: absolute;	
+}
+
+#capturedCanvasBlock {
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+}
+
+.canvasCaptured {
+	border: 2px solid black;
+	border-radius: 5px;
+	width: 160px;
+	height: 120px;
+}
