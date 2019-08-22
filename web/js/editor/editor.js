@@ -69,17 +69,36 @@ document.getElementById("snap").addEventListener("click", function() {
 		closeEl.style.color = 'white';
 		closeEl.classList.add('closeDelButton');
 		closeEl.setAttribute('onclick', "deleteCanvasPhotoBlock(this)");
-		canvas.width = video.videoWidth;
-		canvas.height = video.videoHeight;
+
+		if (video.clientHeight > 0)
+		{
+			canvas.width = video.videoWidth;
+			canvas.height = video.videoHeight;
+		}
+		else
+		{
+			canvas.width = 640;
+			canvas.height = 480;
+		}
+
 		canvas.classList.add('canvasCaptured');
 		canvasBlock.appendChild(closeEl);
 		canvasBlock.classList.add('canvasPhotoBlock');
 		canvasBlock.appendChild(canvas);
 		capturedCanvasBlock.appendChild(canvasBlock);
 		context = canvas.getContext('2d');
-		context.drawImage(video, 0, 0);
+
+		if (video.clientHeight > 0)
+			context.drawImage(video, 0, 0);
+		else
+		{
+			var widthPxDiff = (userLoadedPhoto.naturalWidth - userLoadedPhoto.clientWidth);
+			var priceOfOnePercent = userLoadedPhoto.clientWidth / 100;
+			var percentResize = widthPxDiff / priceOfOnePercent;
+			context.drawImage(userLoadedPhoto, 0, userLoadedPhotoBlock.scrollTop + (userLoadedPhotoBlock.scrollTop / 100) * percentResize , userLoadedPhoto.naturalWidth, 480 + (480 / 100) * percentResize, 0, 0, canvas.width, canvas.height);
+		}
+
 		var allItems = dragItems;
-		console.dir(allItems);
 		for (var q in allItems)
 		{
 			if (allItems[q].tagName == "IMG")
@@ -154,6 +173,9 @@ function startEdit(el)
 	previewBlock.classList.add('previewBlock');
 	previewCloser.classList.remove('hiddenEl');
 	previewCloser.classList.add('closeDelButton');
+
+	// previewCanvasId.height = el.height;
+	// previewCanvasId.width = el.width;
 
 	context = previewCanvasId.getContext('2d');
 	context.drawImage(el, 0, 0);
@@ -281,4 +303,28 @@ function setTranslate(xPos, yPos, el) {
 	el.setAttribute('x_offset', xPos);
 	el.setAttribute('y_offset', yPos);
 	el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+}
+
+
+function showVideo()
+{
+	if (video.clientHeight == 0)
+	{
+		video.classList.remove('hiddenEl');
+		userLoadedPhoto.classList.remove('userPhoto');
+		userLoadedPhoto.classList.add('hiddenEl');
+		userLoadedPhotoBlock.classList.remove('userLoadedPhotoBlock');
+		userLoadedPhotoBlock.classList.add('hiddenEl');
+		showVideoButton.innerHTML = 'Show ur photo';		
+	}
+	else
+	{
+		video.classList.add('hiddenEl');
+		userLoadedPhoto.classList.remove('hiddenEl');
+		userLoadedPhoto.classList.add('userPhoto');
+		userLoadedPhotoBlock.classList.remove('hiddenEl');
+		userLoadedPhotoBlock.classList.add('userLoadedPhotoBlock');
+		showVideoButton.innerHTML = 'Anable camera';		
+	}
+
 }

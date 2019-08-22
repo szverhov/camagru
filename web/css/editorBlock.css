@@ -18,10 +18,32 @@
 	overflow: hidden;
 }
 
-#video {
+.photoMaker {
+	border-radius: 5px;
 	width: 640px;
 	height: 480px;
 	z-index: 1;
+}
+.userPhoto
+{
+	margin: 0px !important;
+	border-radius: 5px;
+	width: 640px;
+	height: auto;
+	z-index: 1;
+}
+
+.userLoadedPhotoBlock {
+	padding: 0px !important;
+	border-radius: 5px;
+	width: 640px;
+	height: 480px;
+	z-index: 1;
+	overflow-y: scroll;	
+}
+
+.userLoadedPhotoBlock::-webkit-scrollbar { 
+    display: none; 
 }
 
 #dragContainer {

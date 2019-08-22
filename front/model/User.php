@@ -62,7 +62,7 @@ class User
 					(`login`, `email`, `password`, `access_level`, `confirm_hash`)
 				VALUES
 					(:login, :email, :password, :access_level, :confirm_hash)
-			";			
+			";
 		}
 		$confirm_hash = hash('md5', time());
 		$res = $GLOBALS['di']->get('db')->execute($sql, [
