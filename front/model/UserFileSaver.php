@@ -33,8 +33,8 @@ class UserFileSaver
 			  die('Base64 value is not a valid image');
 	    	if (!file_exists("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos/"))
 	    		mkdir("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos");
-	    	$newImgName = hash('whirlpool', time() + $_SESSION['logedUser']) . '.png';
-	    	$newImg = "./web/files/userFiles/{$_SESSION['logedUser']}/" . $newImgName;
+	    	$newImgName = hash('whirlpool', time() . $_SESSION['logedUser']) . '.png';
+	    	$newImg = "./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos/" . $newImgName;
 	    	if (!imagepng($img, $newImg, 0))
 	    		die('Img not saved');
 	    	$res = $newImgName;
@@ -52,7 +52,7 @@ class UserFileSaver
 				return $res;
 			$info = pathinfo($imgFile['name']);
 			$ext = $info['extension'];
-			$newFileName = hash('whirlpool', $imgFile['name'] + time()) . '.' . $ext;
+			$newFileName = hash('whirlpool', $imgFile['name'] . time()) . '.' . $ext;
 			$target = $targetDir . $newFileName;
 			if (move_uploaded_file($imgFile['tmp_name'], $target))
 				$res = str_replace('./web', '', $target);

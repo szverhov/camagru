@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <style>
-	body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+	body, h1,h2,h3,h4,h5,h6,div,p,textarea {font-family: "Montserrat", sans-serif}
 	.w3-row-padding img {margin-bottom: 12px}
 	/* Set the width of the sidebar to 120px */
 	.w3-sidebar {width: 120px;background: #222;}
@@ -31,7 +31,7 @@
 				<i class="fa fa-sign-out w3-xxlarge"></i>
 				<p>SIGN OUT</p>
 			</a>
-		<a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+		<a href="/profile" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
 			<i class="fa fa-user w3-xxlarge"></i>
 			<p>PROFILE</p>
 		</a>
@@ -40,7 +40,7 @@
 			<p>EDITOR</p>
 		</a>
 		<?php endif;?>
-		<a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+		<a href="/gallery" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
 			<i class="fa fa-eye w3-xxlarge"></i>
 			<p>GALLERY</p>
 		</a>

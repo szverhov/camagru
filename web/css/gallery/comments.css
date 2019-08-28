@@ -1,0 +1,41 @@
+.comentBlock {
+	height: 480px;
+	width: 650px;
+	padding: 5px;
+	/*background-color: white;*/
+	/*color: black;*/
+	overflow-y: scroll;
+	border-radius: 10px;
+
+}
+
+.senderBox textarea {
+	resize: none;
+	width: 98%;
+	margin: 5px;
+}
+
+.singleCommentBlock {
+	border: 1px solid white;
+	border-radius: 10px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.singleCommentBlock p {
+	max-width: 630px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 2px;
+}
+
+.singleCommentBlock:hover {
+	word-break: break-all;
+}
+
+/*.senderBox {
+	position: fixed;
+}*/
+
+
+

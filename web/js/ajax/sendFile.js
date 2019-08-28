@@ -24,6 +24,20 @@ function sendFile(el, url, reqType)
 	    	userLoadedPhoto.classList.remove('hiddenEl');
 	    	userLoadedPhoto.classList.add('userPhoto');
 	    	userLoadedPhoto.src = res;
+	    	setTimeout(function(){
+		    	if (userLoadedPhoto.naturalHeight < userLoadedPhoto.naturalWidth)
+		    	{
+		    		userLoadedPhoto.style.height = '640px';
+		    		userLoadedPhoto.style.width = 'auto';
+		    	}
+		    	else
+		    	{
+		    		userLoadedPhoto.style.height = 'auto';
+		    		userLoadedPhoto.style.width = '640px';	    		
+		    	}
+	    	}, 100);
+
+	    	console.dir(userLoadedPhoto);
 	    	userLoadedPhotoBlock.classList.remove('hiddenEl');
 	    	userLoadedPhotoBlock.classList.add('userLoadedPhotoBlock');
 

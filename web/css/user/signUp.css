@@ -1,0 +1,35 @@
+#user_sign_up
+{
+	/*position: absolute;*/
+	top: 10vh;
+	right: 2vw;
+	/*visibility: hidden;*/
+	height: 0;
+	width: 0;
+	background: #474747;
+	display: flex;
+	flex-direction: column;
+	border: 2px solid white;
+	border-radius: 10px;
+	justify-content: space-around;
+	z-index: 100;
+	align-items: center;
+	min-height: 300px;
+	min-width: 300px;
+
+}
+.sign_up_input
+{
+	width: 80%;
+}
+
+#user_sign_up_form *{
+	margin: 3px;
+}
+
+.ok {
+	box-shadow: 0 0 0 2px lime;
+}
+.ko {
+	box-shadow: 0 0 0 2px red;
+}

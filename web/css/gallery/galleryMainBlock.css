@@ -1,0 +1,49 @@
+#galleryMainBlock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.postBlock {
+	width: 700px;
+	height: 610px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	border: 2px solid white;
+	border-radius: 10px;
+}
+
+.postImg {
+	height: 480px;
+	width: 640px;
+	border-radius: 10px;
+}
+
+.captionBlock {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	border-radius: 10px;
+	width: 98%;
+}
+
+.captionEl {
+	align-self: flex-start;
+	margin-left: 10px;
+	margin-top: 10px;
+
+}
+
+.postDateEl {
+	align-self: flex-end;
+}
+
+div, p, img {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

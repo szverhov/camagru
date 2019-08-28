@@ -1,0 +1,28 @@
+.heart p {
+  margin-top: 55px;
+  margin-right: 30px;
+}
+
+.heart {
+  /*align-self: flex-start;*/
+  text-align: right ;
+  margin-left: 20px;
+  width: 100px;
+  height: 100px;
+  align-self: flex-start;
+  transform: translate(-50%, -50%);
+  background: url(/files/siteFiles/heart.png) no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  margin-bottom: 0px;
+
+}
+
+@keyframes fave-heart {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
+}

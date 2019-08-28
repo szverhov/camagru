@@ -95,7 +95,16 @@ document.getElementById("snap").addEventListener("click", function() {
 			var widthPxDiff = (userLoadedPhoto.naturalWidth - userLoadedPhoto.clientWidth);
 			var priceOfOnePercent = userLoadedPhoto.clientWidth / 100;
 			var percentResize = widthPxDiff / priceOfOnePercent;
-			context.drawImage(userLoadedPhoto, 0, userLoadedPhotoBlock.scrollTop + (userLoadedPhotoBlock.scrollTop / 100) * percentResize , userLoadedPhoto.naturalWidth, 480 + (480 / 100) * percentResize, 0, 0, canvas.width, canvas.height);
+			console.log(userLoadedPhoto.naturalWidth, 640 + (640 / 100) * percentResize,
+				userLoadedPhoto.naturalHeight, 480 + (480 / 100) * percentResize);
+
+			context.drawImage(
+				userLoadedPhoto,
+				userLoadedPhotoBlock.scrollLeft + (userLoadedPhotoBlock.scrollLeft / 100) * percentResize,
+				userLoadedPhotoBlock.scrollTop + (userLoadedPhotoBlock.scrollTop / 100) * percentResize,
+				640 + (640 / 100) * percentResize,
+				480 + (480 / 100) * percentResize,
+				0, 0, canvas.width, canvas.height);
 		}
 
 		var allItems = dragItems;

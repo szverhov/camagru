@@ -27,9 +27,8 @@ class FileController extends AbstractController
 			$explodedArr = explode(',', $_POST['EditedImg']);
 			if (count($explodedArr) == 2)
 			{
-				$fileName = json_encode(UserFileSaver::saveUserGalleryImageFromBase64($explodedArr[1]));
+				$fileName = UserFileSaver::saveUserGalleryImageFromBase64($explodedArr[1]);
 				Post::savePost($fileName, $_POST['ImageCaption']);
-				echo $fileName;
 				exit;
 			}
 		}

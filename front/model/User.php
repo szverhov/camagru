@@ -113,13 +113,13 @@ class User
 	public static function userLogin($post)
 	{
 		$sql = "
-			SELECT user.id FROM `user` WHERE user.login = :login OR user.email = :login AND user.password = :password
+			SELECT user.id FROM `user` WHERE (user.login = :login AND user.password = :password) OR (user.email = :login AND user.password = :password)
 		";
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, [
 			':login' => $post['Login'],
 			':password' => hash('whirlpool', $post['Password']),
 		]);
-		if (empty($res))
+		if (!$res)
 			return false;
 		return $res['id'];
 	}
@@ -232,4 +232,43 @@ class User
 			return false;
 		return true;
 	}
+
+	public static function checkPassword($password)
+	{
+		if (isset($_SESSION['logedUser']))
+		{
+			$sql = "
+				SELECT user.password FROM `user` WHERE user.password = :password AND user.id = {$_SESSION['logedUser']}
+			";
+			$res = $GLOBALS['di']->get('db')->queryOne($sql, [
+				':password' => hash('whirlpool', $password),
+			]);
+			if ($res)
+				return true;			
+		}
+		return false;
+	}
+
+	public static function changePasswordNoToken($oldPassword, $newPassword)
+	{
+		if ($oldPassword != $newPassword && !self::validatePassword($newPassword))
+			return false ;
+		if (isset($_SESSION['logedUser']))
+		{
+			$sql = "
+				UPDATE `user`
+				SET
+					user.password = :password
+				WHERE user.id = {$_SESSION['logedUser']} AND user.password = :oldPassword
+			";	
+			$res = $GLOBALS['di']->get('db')->execute($sql, [
+				':oldPassword' => hash('whirlpool', $oldPassword),
+				':password' => hash('whirlpool', $newPassword),
+			]);
+			if ($res)
+				return true;
+		}
+		return false;
+	}
+
 }

@@ -1,3 +1,5 @@
+
+
 <link rel="stylesheet" href="/css/stickers.css">
 <link rel="stylesheet" href="/css/closeDelButton.css">
 <link rel="stylesheet" href="/css/submitButton.css">
