@@ -1,3 +1,5 @@
+var allRightChilds = [];
+
 function fillProfileMainBlock()
 {
 	var leftSelectorBlock = createLeftSelectorBlock();
@@ -5,8 +7,13 @@ function fillProfileMainBlock()
 
 	var rightChangePasswordBlock = createChangePasswordBlock(rightSelectorBlock);
 	appendButtonToLeftBlock(leftSelectorBlock, rightChangePasswordBlock, 'passwordBlockForm', 'Change password');
+
 	var rightChangeEmailBlock = createChangeEmailBlock(rightSelectorBlock);
-	appendButtonToLeftBlock(leftSelectorBlock, rightChangeEmailBlock, 'changeBlockForm', 'Change email');
+	appendButtonToLeftBlock(leftSelectorBlock, rightChangeEmailBlock, 'changeEmailBlock', 'Change email');
+
+	var rightChangeLoginBlock = createChangeLoginBlock(rightSelectorBlock);
+	appendButtonToLeftBlock(leftSelectorBlock, rightChangeLoginBlock, 'changeLoginBlock', 'Change login');
+
 }
 
 function createLeftSelectorBlock()
@@ -27,10 +34,17 @@ function createRightSelectorBlock()
 
 function appendButtonToLeftBlock(parent, block, className, buttonText)
 {
+
 	var bttn = document.createElement('bttn');
 	bttn.classList.add('myButton');
 	bttn.innerHTML = buttonText;
+
 	bttn.addEventListener('click', function(){
+		for (var q in allRightChilds)
+			if (allRightChilds[q].getAttribute('class') != block.getAttribute('class') && allRightChilds[q].clientHeight)
+			{
+				allRightChilds[q].setAttribute('class', 'hiddenEl');
+			}
 		if (block.clientHeight > 0)
 		{
 			block.classList.remove(className);

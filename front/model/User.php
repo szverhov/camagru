@@ -223,30 +223,18 @@ class User
 		];
 	}
 
-	private static function validatePassword($password)
+	public static function checkUserPassword($password)
 	{
-		if (!preg_match('/^\w{3,21}$/', $password) ||
-			!preg_match('/[a-z]/', $password) ||
-			!preg_match('/[A-Z]/', $password) ||
-			!preg_match('/[0-9]/', $password))
-			return false;
-		return true;
-	}
-
-	public static function checkPassword($password)
-	{
-		if (isset($_SESSION['logedUser']))
-		{
-			$sql = "
-				SELECT user.password FROM `user` WHERE user.password = :password AND user.id = {$_SESSION['logedUser']}
-			";
-			$res = $GLOBALS['di']->get('db')->queryOne($sql, [
-				':password' => hash('whirlpool', $password),
-			]);
-			if ($res)
-				return true;			
-		}
-		return false;
+		$sql = "
+			SELECT user.password FROM `user` WHERE user.password = :password AND user.id = {$_SESSION['logedUser']}
+		";
+		$res = $GLOBALS['di']->get('db')->queryOne($sql, [
+			':password' => hash('whirlpool', $password),
+		]);
+		if ($res)
+			return true;
+		throw new \Exception("User password is invalid", 1);
+		
 	}
 
 	public static function changePasswordNoToken($oldPassword, $newPassword)
@@ -271,4 +259,106 @@ class User
 		return false;
 	}
 
+	public static function changeLogin($newLogin, $currPassw)
+	{
+		try
+		{
+			if (!self::checkUserPassword($currPassw))
+				throw new \Exception("Wrong password!", 1);
+			if (!self::regexpLogin($newLogin))
+				throw new \Exception("New login isnt valid! Min len 3, max len 21, only latin characters", 1);
+			if (!self::checkLoginOnDuplicate($newLogin))
+				throw new \Exception("This login allready exists.", 1);
+
+			$sql = "
+				UPDATE `user` SET `login` = :newLogin WHERE `id` = {$_SESSION['logedUser']}
+			";
+			$res = $GLOBALS['di']->get('db')->execute($sql, [
+				':newLogin' => $newLogin,
+			]);
+		}
+		catch (\Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function checkEmailBeforeChange($email)
+	{
+		if (!self::regexpEmail($email))
+			throw new \Exception("Email is invalid.", 1);
+			
+		$sql = "
+			SELECT user.email FROM `user` WHERE user.email = :email
+		";
+		$res = $GLOBALS['di']->get('db')->queryOne($sql, [
+			':email' => $email,
+		]);
+		if ($res)
+			throw new \Exception("Email allready exists.", 1);
+		return false;		
+	}
+
+	public static function changeEmail($newEmail, $currPassw)
+	{
+		try
+		{
+			if (!self::validatePassword($currPassw))
+				throw new \Exception("Wrong password!", 1);
+			self::checkEmailBeforeChange($newEmail);
+			$sql = "
+				UPDATE `user` SET `email` = :newEmail WHERE `id` = {$_SESSION['logedUser']}
+			";
+			$res = $GLOBALS['di']->get('db')->execute($sql, [
+				':newEmail' => $newEmail,
+			]);
+		}
+		catch (\Exception $e)
+		{
+			throw $e;
+		}
+	}
+
+	public static function validateLogin($login)
+	{
+		if (!self::regexpLogin($login))
+			throw new \Exception("New login isnt valid! Min len 3, max len 21, only latin characters or numbers", 1);
+		else
+			return true;
+			
+	}
+
+	public static function checkLoginOnDuplicate($login)
+	{
+		$sql = "
+			SELECT login FROM user WHERE login = :login
+		";
+		$res = $GLOBALS['di']->get('db')->queryOne($sql, [
+			':login' => $login,
+		]);
+		if ($res)
+			throw new \Exception("This login allready exists.", 1);
+		return true;
+	}
+
+	public static function validatePassword($password)
+	{
+		if (!preg_match('/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/', $password))
+			return false;
+		return true;
+	}
+
+	private static function regexpLogin($login)
+	{
+		if (!preg_match('/^[a-z-A-Z-0-9]{3,23}$/', $login))
+			return false;
+		return true;
+	}
+
+	private static function regexpEmail($email)
+	{
+		if (!preg_match('/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/', $email))
+			return false;
+		return true;
+	}
 }

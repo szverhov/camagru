@@ -20,14 +20,23 @@ class Application
 		$controller = "\\Front\\Controller\\" . $this->_router->getController() . "Controller";
 		$func = 'action' . $this->_router->getAction();
 
-		call_user_func_array([
-			new $controller($this->_di),
-			'beforeAction'
-		], []);
-
-		call_user_func_array([
-			new $controller($this->_di),
-			$func,
-		], $_GET);
+		try {
+			call_user_func_array([
+				new $controller($this->_di),
+				'beforeAction'
+			], []);
+			
+			call_user_func_array([
+				new $controller($this->_di),
+				$func,
+			], $_GET);
+		}
+		catch (\Exception $e)
+		{
+			exit (json_encode([
+				'success' => 0,
+				'message' => $e->getMessage(),
+			]));
+		}
 	}
 }
