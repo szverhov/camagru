@@ -16,6 +16,21 @@ class ProfileController extends AbstractController
 			throw new \Exception("You have no rights to access this page", 1);
 	}
 
+	public function actionDeletePost()
+	{
+		$res = [];
+		try
+		{
+			if ($_POST && isset($_POST['PostID']))
+				exit (json_encode(Profile::deletePost($_POST['PostID'])));
+		} catch (Exception $e) {
+			$res['success'] = 0;
+			$res['message'] = $e->getMessage();
+		}
+		exit (json_encode($res));
+	}
+
+
 	public function actionIndex()
 	{
 		$this->render('index', []);

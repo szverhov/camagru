@@ -26,6 +26,10 @@ class UserController extends AbstractController
 		{
 			if (($res = User::userLogin($_POST)))
 			{
+				if ($res == 'U must submit ur registration before sign in!')
+				{
+					$this->redirect('/user/sign-in', ['mainMessage' => $res]);	
+				}
 				$_SESSION['logedUser'] = $res;
 				$this->redirect('/default/index', ['mainMessage' => 'Hello, u successfully signed in!']);
 			}
@@ -40,7 +44,7 @@ class UserController extends AbstractController
 		if (isset($_SESSION['logedUser']))
 		{
 			unset($_SESSION['logedUser']);
-			$this->redirect('/user/sign-in', ['mainMessage' => 'Cya sunshine!']);			
+			$this->redirect('/user/sign-in', ['mainMessage' => 'Cya sunshine!']);	
 		}
 		$this->redirect('/default/index', ['mainMessage' => 'U not sign in!']);	
 	}
@@ -52,7 +56,7 @@ class UserController extends AbstractController
 			$res = User::registerUser($_POST);
 			if ($res['error'])
 				$this->redirect('/user/sign-up', ['mainMessage' => $res['message']]);
-			$this->redirect('/default/index', ['mainMessage' => $res['message']]);
+			$this->redirect('/user/sign-in', ['mainMessage' => $res['message']]);
 		}
 		$this->render('signUp', []);
 	}

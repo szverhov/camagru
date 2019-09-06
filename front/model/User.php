@@ -18,7 +18,7 @@ class User
 	public static function checkEmail($email)
 	{
 		$sql = "
-			SELECT user.email FROM `user` WHERE user.email = :email AND user.access_level != 0
+			SELECT user.email FROM `user` WHERE user.email = :email
 		";
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, [':email' => $email]);
 		if (!empty($res))
@@ -113,7 +113,7 @@ class User
 	public static function userLogin($post)
 	{
 		$sql = "
-			SELECT user.id FROM `user` WHERE (user.login = :login AND user.password = :password) OR (user.email = :login AND user.password = :password)
+			SELECT * FROM `user` WHERE (user.login = :login AND user.password = :password) OR (user.email = :login AND user.password = :password) 
 		";
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, [
 			':login' => $post['Login'],
@@ -121,6 +121,8 @@ class User
 		]);
 		if (!$res)
 			return false;
+		if (!$res['access_level'])
+			return "U must submit ur registration before sign in!";
 		return $res['id'];
 	}
 

@@ -11,6 +11,9 @@ function loadEditedPhoto()
 	    if(request.readyState == 4 && request.status == 200)
 	    {	
 	    	console.log('success');
+	    	splited = window.location.href.split('/');
+	   		splited[3] = 'gallery';
+	   		window.location.replace(splited.join('/'));
 	    }
 	}	
 	request.send(formData);

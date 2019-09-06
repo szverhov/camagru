@@ -26,12 +26,14 @@ class Post
 			SELECT
 				post.*,
 				user.login,
-				(SELECT COUNT(*) FROM post_like WHERE post_like.postID = post.id) as likeCount,
-				(SELECT COUNT(*) FROM post_like WHERE post_like.postID = post.id AND post_like.userID = {$_SESSION['logedUser']}) as allreadyLiked
+				(SELECT COUNT(*) FROM post_like WHERE post_like.postID = post.id) as likeCount";
+		if (isset($_SESSION['logedUser']))
+			$sql .=	",(SELECT COUNT(*) FROM post_like WHERE post_like.postID = post.id AND post_like.userID = {$_SESSION['logedUser']}) as allreadyLiked";
+		$sql .=	"
 			FROM `post`
 			LEFT JOIN user ON user.id = post.userID
 			WHERE 1
-			ORDER BY `date`
+			ORDER BY `date` DESC
 		";
 		$res = $GLOBALS['di']->get('db')->queryAll($sql, []);
 		foreach ($res as $resIndx => $post)
@@ -58,6 +60,8 @@ class Post
 			FROM `post_like`
 			WHERE post_like.userID = :userID AND post_like.postID = :postID
 		";
+
+		//send mesage to post owner
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, [':userID' => $userID, ':postID' => $postID]);
 		if (!$res)
 		{
@@ -92,6 +96,24 @@ class Post
 			':userID' => $userID,
 			':postID' => $postID
 		]);
+
+		$sql = "
+			SELECT notifications FROM user WHERE id = {$_SESSION['logedUser']}
+		";
+		$res = $GLOBALS['di']->get('db')->queryOne($sql, []);
+		if ($res['notifications'] && $userID != $_SESSION['logedUser'])
+		{
+			$sql = "
+				SELECT login FROM user WHERE id = :userID
+			";
+			$res = $GLOBALS['di']->get('db')->queryOne($sql, ['userID' => $userID]);
+			$login = $res['login'];
+			$GLOBALS['di']->get('mailer')->sendMasage(
+				$post['Email'],
+				'Notification',
+				"<p>{$login} coment ur photo!</p>"
+			);			
+		}
 
 		$sql = "
 			SELECT

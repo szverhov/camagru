@@ -1,0 +1,24 @@
+#userGallery
+{
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	height: 600px;
+	width: 700px;
+	border: 2px solid white;
+	border-radius: 10px;
+	overflow-y: scroll;
+}
+
+#userGallery img {
+	max-width: 320px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.closeDelButton {
+	position: relative !important;
+	top: -30px;
+}

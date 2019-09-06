@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	    if(request.readyState == 4 && request.status == 200)
 	    {
 	    	userData = JSON.parse(request.responseText);
-	    	// console.log(userData);
 			fillProfileMainBlock();
+			fillUserGallery(userData['posts']);
 	    }
 	}	
 	request.send();

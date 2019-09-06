@@ -2,6 +2,8 @@ function addHeartButtonEventListener(el)
 {
   el.addEventListener('click', function ()
   {
+    if (!g_user_logged_in)
+      return ;
     var countEl = getCountEl(el);
     if (el.style.backgroundPosition.indexOf("-2800px 0") != -1)
     {

@@ -6,7 +6,7 @@
 	function regexPassword(el)
 	{
 		var password = el.value;
-		if (password.match(/^\w{3,21}$/) && password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[0-9]/))
+		if (password.match(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/))
 		{
 			el.removeAttribute("pattern");
 			passwordRegexped = true;
@@ -20,6 +20,27 @@
 			el.classList.add('ko');
 			el.classList.remove('ok');
 		}
+	}
+
+	function regexEmail(el)
+	{
+		email = el.value;
+		if (email.match(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/))
+		{
+			el.removeAttribute("pattern");
+			el.classList.add('ok');
+			el.classList.remove('ko');
+			return true;
+		}
+		else
+		{
+			el.title = "Invalid email";
+			el.setAttribute("pattern", null);
+			el.classList.add('ko');
+			el.classList.remove('ok');
+			emailCheck = false;
+			return false;
+		}	
 	}
 
 	function checkFormValues()
@@ -66,6 +87,9 @@
 		var email = el.value;
 		if (email == '')
 			return ;
+		if (!regexEmail(el))
+			return ;
+
 		var http = new XMLHttpRequest();
 		var url = '/user/check-email-existence';
 		var params = 'Email=' + email;
@@ -89,10 +113,34 @@
 		http.send(params);		
 	}
 
+	function regexLogin(el)
+	{
+		login = el.value;
+		if (login.match(/^[a-z-A-Z-0-9]{3,23}$/))
+		{
+			el.removeAttribute("pattern");
+			el.classList.add('ok');
+			el.classList.remove('ko');
+			return true;
+		}
+		else
+		{
+			el.title = "Invalid email";
+			el.setAttribute("pattern", null);
+			el.classList.add('ko');
+			el.classList.remove('ok');
+			loginCheck = false;
+			return false;
+		}	
+
+	}
+
 	function checkLoginExistance(el)
 	{
 		var login = el.value;
 		if (login == '')
+			return ;
+		if (!regexLogin(el))
 			return ;
 		var http = new XMLHttpRequest();
 		var url = '/user/check-login-existence';
