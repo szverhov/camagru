@@ -21,5 +21,7 @@
 <script type="text/javascript" src="/js/profile/login.js"></script>
 <script type="text/javascript" src="/js/profile/galleryFiller.js"></script>
 <script type="text/javascript" src="/js/user/signUp.js"></script>
+<script type="text/javascript" src="/js/profile/notifications.js"></script>
+
 
 

@@ -4,16 +4,10 @@ function fillProfileMainBlock()
 {
 	var leftSelectorBlock = createLeftSelectorBlock();
 	var rightSelectorBlock = createRightSelectorBlock();
-
-	var rightChangePasswordBlock = createChangePasswordBlock(rightSelectorBlock);
-	appendButtonToLeftBlock(leftSelectorBlock, rightChangePasswordBlock, 'passwordBlockForm', 'Change password');
-
-	var rightChangeEmailBlock = createChangeEmailBlock(rightSelectorBlock);
-	appendButtonToLeftBlock(leftSelectorBlock, rightChangeEmailBlock, 'changeEmailBlock', 'Change email');
-
-	var rightChangeLoginBlock = createChangeLoginBlock(rightSelectorBlock);
-	appendButtonToLeftBlock(leftSelectorBlock, rightChangeLoginBlock, 'changeLoginBlock', 'Change login');
-
+	appendButtonToLeftBlock(leftSelectorBlock, createChangePasswordBlock(rightSelectorBlock), 'passwordBlockForm', 'Change password');
+	appendButtonToLeftBlock(leftSelectorBlock, createChangeEmailBlock(rightSelectorBlock), 'changeEmailBlock', 'Change email');
+	appendButtonToLeftBlock(leftSelectorBlock, createChangeLoginBlock(rightSelectorBlock), 'changeLoginBlock', 'Change login');
+	appendButtonToLeftBlock(leftSelectorBlock, createChangeNotificationBlock(rightSelectorBlock), 'changeNotificationBlock', 'Notifications');
 }
 
 function createLeftSelectorBlock()

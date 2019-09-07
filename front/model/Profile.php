@@ -12,6 +12,8 @@ class Profile
 				user.login,
 				user.creation_date,
 				user.alerts,
+				user.notifications,
+				user.id,
 				user_info.*
 			FROM `user`
 			LEFT JOIN user_info ON user_info.userID = user.id
@@ -67,6 +69,21 @@ class Profile
 		else
 		{
 			throw new Exception("U have no permission to do this!", 1);
+		}
+	}
+
+	public static function changeNotifications($userID)
+	{
+		if ($userID == $_SESSION['logedUser'])
+		{
+			$sql = "SELECT notifications FROM user WHERE id = {$_SESSION['logedUser']}";
+			$res = $GLOBALS['di']->get('db')->queryOne($sql, []);			
+			$notif = $res['notifications'] ? 0 : 1;
+
+			$sql = "
+				UPDATE `user` SET notifications = {$notif} WHERE id = {$_SESSION['logedUser']}
+			";
+			$res = $GLOBALS['di']->get('db')->execute($sql, []);
 		}
 	}
 }

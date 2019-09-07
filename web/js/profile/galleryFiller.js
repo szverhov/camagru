@@ -28,20 +28,26 @@ function createDellButton()
 
 function deleteThisImg(el)
 {
-	// console.log(el);
-	// console.log(el.parentNode.getAttribute('img-id'));
-
-	el.parentNode.parentNode.removeChild(el.parentNode);
-
-	var request = new XMLHttpRequest();
-	var formData = new FormData();
-	formData.append("PostID", el.parentNode.getAttribute('img-id'));
-	request.open('POST', '/profile/delete-post', true);
-	request.onreadystatechange = function()
+	if (confirm('Are u sure want to delete this img?'))
 	{
-		if(request.readyState == 4 && request.status == 200)
+		el.parentNode.parentNode.removeChild(el.parentNode);
+
+		var request = new XMLHttpRequest();
+		var formData = new FormData();
+		formData.append("PostID", el.parentNode.getAttribute('img-id'));
+		request.open('POST', '/profile/delete-post', true);
+		request.onreadystatechange = function()
 		{
-		}
-	} 
-	request.send(formData);
+			if(request.readyState == 4 && request.status == 200)
+			{
+			}
+		} 
+		request.send(formData);
+	}
+	else
+	{
+	    // Do nothing!
+	}
+
+
 }

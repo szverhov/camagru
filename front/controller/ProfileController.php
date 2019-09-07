@@ -31,6 +31,14 @@ class ProfileController extends AbstractController
 	}
 
 
+	public function actionChangeNotif()
+	{
+		if ($_POST && isset($_POST['UserID']))
+		{
+			exit (json_encode(Profile::changeNotifications($_POST['UserID'])));
+		}
+	}
+
 	public function actionIndex()
 	{
 		$this->render('index', []);
