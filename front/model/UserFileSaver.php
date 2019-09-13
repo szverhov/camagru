@@ -33,6 +33,7 @@ class UserFileSaver
 			  die('Base64 value is not a valid image');
 	    	if (!file_exists("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos/"))
 	    		mkdir("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos");
+
 	    	$newImgName = hash('whirlpool', time() . $_SESSION['logedUser']) . '.png';
 	    	$newImg = "./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos/" . $newImgName;
 	    	if (!imagepng($img, $newImg, 0))

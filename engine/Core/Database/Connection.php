@@ -14,7 +14,7 @@ class Connection
 
 	private function connect()
 	{
-		$config = require_once __DIR__ . '/../../Config/DB.php';
+		$config = require_once __DIR__ . '/../../Config/database.php';
 		try {
 			$this->_link = new PDO(
 				"mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}",

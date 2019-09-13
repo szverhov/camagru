@@ -13,7 +13,7 @@ class ProfileController extends AbstractController
 	public function beforeAction()
 	{
 		if (!isset($_SESSION['logedUser']))
-			throw new \Exception("You have no rights to access this page", 1);
+			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
 	}
 
 	public function actionDeletePost()

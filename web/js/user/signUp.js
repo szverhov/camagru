@@ -6,7 +6,7 @@
 	function regexPassword(el)
 	{
 		var password = el.value;
-		if (password.match(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/))
+		if (password.match(/((?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[\W]).{8,64})/))
 		{
 			el.removeAttribute("pattern");
 			passwordRegexped = true;

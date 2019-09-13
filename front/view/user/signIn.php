@@ -2,12 +2,10 @@
 
 #user_login
 {
-	/*position: absolute;*/
 	top: 10vh;
 	right: 2vw;
-	/*visibility: hidden;*/
-	height: 0;
-	width: 0;
+	height: 30%;
+	width: 30%;
 	background: #474747;
 	display: flex;
 	flex-direction: column;
@@ -22,26 +20,39 @@
 }
 .login_input
 {
-	width: 80%;
+	width: 100%;
+	height: 40px;
 }
 
 #w0 *{
-	margin: 3px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
 }
-</style>
 
-<h1>Sign in</h1>
+.inptDiv {
+	margin: 10px;
+	width: 90%;
+}
+
+</style>
+<link rel="stylesheet" href="/css/submitButton.css">
+
+
 
 <div id='user_login'>
+<h1>Sign in</h1>
 	<form id='w0' method="post">
-		<div>
+		<div class="inptDiv">
 			<input class="login_input" type="text" name="Login" placeholder="Login/Email" required>
 		</div>
-		<div>
+		<div class="inptDiv">
 			<input class="login_input" type="password" name="Password" placeholder="Password" required>
 		</div>
-		<div>
-			<button class="btn btn-success">SUBMIT</button>
+		<div class="inptDiv">
+			<button class="myButton">SUBMIT</button>
 		</div>
 	</form>
 	<div>

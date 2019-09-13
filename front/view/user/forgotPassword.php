@@ -18,22 +18,35 @@
 }
 .user_form_input
 {
-	width: 80%;
+	width: 100%;
+	height: 40px;
 }
+
 #w0 *{
-	margin: 3px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.inptDiv {
+	margin: 10px;
+	width: 90%;
 }
 </style>
 
-<h1>User password restoration</h1>
+<link rel="stylesheet" href="/css/submitButton.css">
 
 <div id='user_form'>
+<h1>User password restoration</h1>
+
 	<form id='w0' method="post">
-		<div>
+		<div class="inptDiv">
 			<input class="user_form_input" type="email" name="Email" placeholder="Email" required>
 		</div>
-		<div>
-			<button class="btn btn-success">SUBMIT RESTORATION</button>
+		<div class="inptDiv">
+			<button class="myButton">Submit</button>
 		</div>
 	</form>
 </div> 

@@ -40,7 +40,7 @@ function fillCommentBlock(el, commentsArr, postID, userID)
 	el.appendChild(senderBox);
 
 	sendButton.addEventListener('click', function(){
-		if (addCommentTextArea.value != '' && g_user_logged_in)
+		if (addCommentTextArea.value != '' && g_user_logged_in && addCommentTextArea.value.length < 30000)
 		{
 			var request = new XMLHttpRequest();
 			var formData = new FormData();

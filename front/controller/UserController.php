@@ -63,12 +63,16 @@ class UserController extends AbstractController
 
 	public function actionCheckLoginExistence()
 	{
+		if (!isset($_SESSION['logedUser']))
+			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);		
 		if ($_POST && isset($_POST['Login']))
 			exit (json_encode(User::checkLogin($_POST['Login'])));	
 	}
 
 	public function actionCheckEmailExistence()
 	{
+		if (!isset($_SESSION['logedUser']))
+			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
 		if ($_POST && isset($_POST['Email']))
 		{
 			exit (json_encode(User::checkEmail($_POST['Email'])));
@@ -83,6 +87,8 @@ class UserController extends AbstractController
 
 	public function actionForgotPassword()
 	{
+		if (isset($_SESSION['logedUser']))
+			$this->redirect('/gallery', []);
 		if ($_POST && isset($_POST['Email']))
 		{
 			$res = User::forgotPassword($_POST['Email']);
@@ -97,6 +103,8 @@ class UserController extends AbstractController
 
 	public function actionRestorePassword($token)
 	{
+		if (isset($_SESSION['logedUser']))
+			$this->redirect('/gallery', []);
 		$res = User::checkToken($token);
 		if ($res['error'])
 			$this->redirect('/user/forgotPassword', [
@@ -111,7 +119,7 @@ class UserController extends AbstractController
 					'token' => $token,
 					'mainMessage' => $res['message'],
 				]);
-			$this->redirect('/user/login', ['mainMessage' => $res['message']]);
+			$this->redirect('/user/sign-in', ['mainMessage' => $res['message']]);
 		}
 
 		$this->render('passwordRestoration', [

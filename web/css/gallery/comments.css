@@ -2,8 +2,6 @@
 	height: 480px;
 	width: 650px;
 	padding: 5px;
-	/*background-color: white;*/
-	/*color: black;*/
 	overflow-y: scroll;
 	border-radius: 10px;
 
@@ -33,9 +31,17 @@
 	word-break: break-all;
 }
 
-/*.senderBox {
-	position: fixed;
-}*/
+@media (pointer:none), (pointer:coarse) {
+	.comentBlock {
+		height: 30vh;
+		width: 90vw;
+		padding: 5px;
+		overflow-y: scroll;
+		border-radius: 10px;
+		/*-webkit-touch-overflow:scroll;*/
+	}
 
-
-
+	.singleCommentBlock p {
+		max-width: 80vw;
+	}
+}

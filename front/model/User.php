@@ -345,7 +345,7 @@ class User
 
 	public static function validatePassword($password)
 	{
-		if (!preg_match('/((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/', $password))
+		if (!preg_match('/((?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[\W]).{8,64})/', $password))
 			return false;
 		return true;
 	}

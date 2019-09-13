@@ -29,6 +29,12 @@ class GalleryController extends AbstractController
 
 	public function actionSaveComment()
 	{
+			// echo "<pre>";
+			// print_r( $_POST['userID']);
+			// print_r( $_SESSION['logedUser']);
+
+			// echo "</pre>";
+			// exit;
 		if (!isset($_SESSION['logedUser']))
 			throw new \Exception("You have no rights to access this page", 1);
 		if ($_POST && isset($_POST['comment'], $_POST['postID'], $_POST['userID']))

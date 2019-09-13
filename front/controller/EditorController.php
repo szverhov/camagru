@@ -8,16 +8,17 @@ use Front\Model\User;
 
 class EditorController extends AbstractController
 {
-	// public function beforeAction()
-	// {
-	// 	echo 'asd';
-	// }
+	public function beforeAction()
+	{
+		if (!isset($_SESSION['logedUser']))
+			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
+	}
+	
 	private $_stickers = [];
 
 	public function actionIndex()
 	{
-		if (!isset($_SESSION['logedUser']))
-			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
+
 		$this->render('index', ['var' => 'Main page']);
 	}
 

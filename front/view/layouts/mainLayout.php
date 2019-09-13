@@ -3,7 +3,9 @@
 <title>Camagru</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" href="/css/w3.css">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
@@ -13,7 +15,24 @@
 	/* Set the width of the sidebar to 120px */
 	.w3-sidebar {width: 120px;background: #222;}
 	/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-	#main {margin-left: 120px}
+	#main {
+		/*border: 2px solid red;*/
+		margin-top: 40px !important;
+		margin-left: 120px;
+		width: 100vw;
+		/*height: 100%;*/
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		flex-direction: column;
+	}
+	@media (pointer:none), (pointer:coarse) {
+		#main {
+			/*border: 2px solid red;*/
+			margin-top: 40px !important;
+		}
+	}
+
 	/* Remove margins from "page content" on small screens */
 	@media only screen and (max-width: 600px) {#main {margin-left: 0}}
 
@@ -52,10 +71,10 @@
 				<a href="/user/sign-in" class="w3-bar-item w3-button" style="width:25% !important">SIGN IN</a>
 			<?php else:?>
 				<a href="/user/sign-out" class="w3-bar-item w3-button" style="width:25% !important">SIGN OUT</a>
-				<a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PROFILE</a>
-				<a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">EDITOR</a>
+				<a href="/profile" class="w3-bar-item w3-button" style="width:25% !important">PROFILE</a>
+				<a href="/editor" class="w3-bar-item w3-button" style="width:25% !important">EDITOR</a>
 			<?php endif;?>
-			<a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">GALLERY</a>
+			<a href="/gallery" class="w3-bar-item w3-button" style="width:25% !important">GALLERY</a>
 		</div>
 	</div>
 
@@ -64,8 +83,8 @@
 			<h1 class="w3-jumbo"><span class="w3-hide-small">Camagru</span></h1>
 		</header> -->
 	<?php
-		if (isset($mainMessage))
-			echo($mainMessage);
+		// if (isset($mainMessage))
+		// 	echo($mainMessage);
 		include $body;
 	?>
 	<!--     <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">

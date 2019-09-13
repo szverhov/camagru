@@ -61,8 +61,9 @@ class Post
 			WHERE post_like.userID = :userID AND post_like.postID = :postID
 		";
 
+
 		//send mesage to post owner
-		$res = $GLOBALS['di']->get('db')->queryOne($sql, [':userID' => $userID, ':postID' => $postID]);
+		$res = $GLOBALS['di']->get('db')->queryOne($sql, [':userID' => $_SESSION['logedUser'], ':postID' => $postID]);
 		if (!$res)
 		{
 			$sql = "
@@ -71,7 +72,7 @@ class Post
 				VALUES
 					(:userID, :postID)
 			";
-			$res1 = $GLOBALS['di']->get('db')->execute($sql, [':userID' => $userID, ':postID' => $postID]);
+			$res1 = $GLOBALS['di']->get('db')->execute($sql, [':userID' => $_SESSION['logedUser'], ':postID' => $postID]);
 		}
 		else
 		{
@@ -79,7 +80,7 @@ class Post
 				DELETE FROM post_like
 				WHERE userID = :userID AND postID = :postID
 			";
-			$res1 = $GLOBALS['di']->get('db')->execute($sql, [':userID' => $userID, ':postID' => $postID]);
+			$res1 = $GLOBALS['di']->get('db')->execute($sql, [':userID' => $_SESSION['logedUser'], ':postID' => $postID]);
 		}		
 	}
 
@@ -93,23 +94,34 @@ class Post
 		";
 		$res = $GLOBALS['di']->get('db')->execute($sql, [
 			':comment' => htmlspecialchars($comment),
-			':userID' => $userID,
-			':postID' => $postID
+			':userID' => $_SESSION['logedUser'],
+			':postID' => $postID,
 		]);
 
 		$sql = "
-			SELECT notifications FROM user WHERE id = {$_SESSION['logedUser']}
+			SELECT notifications FROM user WHERE id = {$userID}
 		";
+
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, []);
+
 		if ($res['notifications'] && $userID != $_SESSION['logedUser'])
 		{
 			$sql = "
-				SELECT login FROM user WHERE id = :userID
+				SELECT login FROM user WHERE id = {$_SESSION['logedUser']}
 			";
-			$res = $GLOBALS['di']->get('db')->queryOne($sql, ['userID' => $userID]);
+
+			$res = $GLOBALS['di']->get('db')->queryOne($sql, []);
 			$login = $res['login'];
+
+			$sql = "
+				SELECT email FROM user WHERE id = {$userID}
+			";
+
+			$res = $GLOBALS['di']->get('db')->queryOne($sql, []);
+			$email = $res['email'];
+
 			$GLOBALS['di']->get('mailer')->sendMasage(
-				$post['Email'],
+				$email,
 				'Notification',
 				"<p>{$login} coment ur photo!</p>"
 			);			

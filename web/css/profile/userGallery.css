@@ -22,3 +22,30 @@
 	position: relative !important;
 	top: -30px;
 }
+
+@media (pointer:none), (pointer:coarse) {
+	#userGallery
+	{
+		margin-top: 10px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		height: 40vh;
+		width: 93vw;
+		border: 2px solid white;
+		border-radius: 10px;
+		overflow-y: scroll;
+	}
+
+	#userGallery img {
+		max-width: 320px;
+		margin: 5px;
+		border-radius: 5px;
+	}
+
+	.closeDelButton {
+		position: relative !important;
+		top: -30px;
+	}	
+}

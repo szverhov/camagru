@@ -22,11 +22,21 @@
 }
 .sign_up_input
 {
-	width: 80%;
+	width: 100%;
+	height: 40px;
 }
 
 #user_sign_up_form *{
-	margin: 3px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.inptDiv {
+	margin: 10px;
+	width: 90%;
 }
 
 .ok {
@@ -36,20 +46,21 @@
 	box-shadow: 0 0 0 2px red;
 }
 </style>
+<link rel="stylesheet" href="/css/submitButton.css">
 
-<h1>User password restoration</h1>
 
 
 <div id='user_sign_up'>
+	<h1>User password restoration</h1>
 	<form id='user_sign_up_form' method="post" action="/user/restore-password?token=<?=$token?>">
-		<div>
+		<div class="inptDiv">
 			<input class="sign_up_input" type="password" name="Password" title="Ur password must atleast one uppercase letter, one lowercase letter and one number and be atleast 8 symbols" pattern placeholder="Password" required minlength="3" maxlength="21" onkeyup="passwordCompare();" onchange="regexPassword(this)">
 		</div>
-		<div>
+		<div class="inptDiv">
 			<input class="sign_up_input" type="password" name="RePassword" placeholder="Password confirm" required minlength="3" maxlength="21" onkeyup="passwordCompare();">
 		</div>
-		<div>
-			<button onclick="return checkFormValues();">SUBMIT</button>
+		<div class="inptDiv">
+			<button class="myButton" onclick="return checkFormValues();">SUBMIT</button>
 		</div>
 	</form>
 </div> 
@@ -60,7 +71,7 @@
 	function regexPassword(el)
 	{
 		var password = el.value;
-		if (password.match(/^\w{3,21}$/) && password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[0-9]/))
+		if (password.match(/((?=.*\d)(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*[\W]).{8,64})/))
 			el.removeAttribute("pattern");
 		else
 			el.setAttribute("pattern", null);
