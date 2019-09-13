@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/css/submitButton.css">
 
 
+
 <div id='user_sign_up'>
 <h1>Sign up</h1>
 

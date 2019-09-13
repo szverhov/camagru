@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <style>
+	#main_message{
+		position: absolute;
+		top:3vh;
+		left: 12vw;
+	}
 	body, h1,h2,h3,h4,h5,h6,div,p,textarea {font-family: "Montserrat", sans-serif}
 	.w3-row-padding img {margin-bottom: 12px}
 	/* Set the width of the sidebar to 120px */
@@ -32,6 +37,7 @@
 			margin-top: 40px !important;
 		}
 	}
+
 
 	/* Remove margins from "page content" on small screens */
 	@media only screen and (max-width: 600px) {#main {margin-left: 0}}
@@ -78,13 +84,17 @@
 		</div>
 	</div>
 
+	<?php
+		if (isset($mainMessage))
+			echo'<div id="main_message">' . ($mainMessage) . '</div>';
+	?>
+
 	<div class="w3-padding-large" id="main">
 <!-- 		<header class="w3-container w3-padding-32 w3-center w3-black" id="home">
 			<h1 class="w3-jumbo"><span class="w3-hide-small">Camagru</span></h1>
 		</header> -->
 	<?php
-		// if (isset($mainMessage))
-		// 	echo($mainMessage);
+
 		include $body;
 	?>
 	<!--     <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">

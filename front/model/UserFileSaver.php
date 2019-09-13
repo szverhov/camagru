@@ -31,6 +31,10 @@ class UserFileSaver
 	    	$img = imageCreateFromString($base64Img);
 			if (!$img)
 			  die('Base64 value is not a valid image');
+			if (!file_exists("./web/files/userFiles"))
+				mkdir("./web/files/userFiles");
+			if (!file_exists("./web/files/userFiles/{$_SESSION['logedUser']}"))
+				mkdir("./web/files/userFiles/{$_SESSION['logedUser']}");
 	    	if (!file_exists("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos/"))
 	    		mkdir("./web/files/userFiles/{$_SESSION['logedUser']}/userPhotos");
 

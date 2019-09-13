@@ -63,16 +63,16 @@ class UserController extends AbstractController
 
 	public function actionCheckLoginExistence()
 	{
-		if (!isset($_SESSION['logedUser']))
-			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);		
+		// if (!isset($_SESSION['logedUser']))
+		// 	$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);		
 		if ($_POST && isset($_POST['Login']))
 			exit (json_encode(User::checkLogin($_POST['Login'])));	
 	}
 
 	public function actionCheckEmailExistence()
 	{
-		if (!isset($_SESSION['logedUser']))
-			$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
+		// if (!isset($_SESSION['logedUser']))
+		// 	$this->redirect('/user/sign-in', ['mainMessage' => 'Please sign in to the system!']);
 		if ($_POST && isset($_POST['Email']))
 		{
 			exit (json_encode(User::checkEmail($_POST['Email'])));

@@ -34,6 +34,7 @@
 		}
 		else
 		{
+			alert('Not valid email!');
 			el.title = "Invalid email";
 			el.setAttribute("pattern", null);
 			el.classList.add('ko');
@@ -102,6 +103,8 @@
 		    	{
 		    		el.classList.add('ko');
 		    		emailCheck = false;
+		    		console.log('asd');
+		    		alert('This email allready exists');
 		    	}
 		    	else
 		    	{
@@ -125,6 +128,7 @@
 		}
 		else
 		{
+			alert('Invalid login!');
 			el.title = "Invalid email";
 			el.setAttribute("pattern", null);
 			el.classList.add('ko');
@@ -152,6 +156,7 @@
 		    	var res = JSON.parse(http.responseText);
 		    	if (res)
 		    	{
+		    		alert("Login allready exists");
 		    		el.classList.add('ko');
 		    		loginCheck = false;
 		    	}

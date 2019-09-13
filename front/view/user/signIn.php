@@ -44,7 +44,7 @@
 
 <div id='user_login'>
 <h1>Sign in</h1>
-	<form id='w0' method="post">
+	<form id='w0' method="post" action="/user/sign-in">
 		<div class="inptDiv">
 			<input class="login_input" type="text" name="Login" placeholder="Login/Email" required>
 		</div>

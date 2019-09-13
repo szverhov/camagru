@@ -7,7 +7,7 @@ class User
 	public static function checkLogin($login)
 	{
 		$sql = "
-			SELECT user.login FROM `user` WHERE user.login = :login AND user.access_level != 0
+			SELECT user.login FROM `user` WHERE user.login = :login
 		";
 		$res = $GLOBALS['di']->get('db')->queryOne($sql, [':login' => $login]);
 		if (!empty($res))
@@ -104,10 +104,13 @@ class User
 				'message' => "<p>Ur account confirmed! Just enter system using form below: </p>",
 			];
 		}
-		return [
-			'error' => true,
-			'message' => "<p>This token allready expired or isnt valid, to get new one use form below: </p>",
-		];
+		else
+		{
+			return [
+				'error' => true,
+				'message' => "<p>This token allready expired or isnt valid, to get new one use form below: </p>",
+			];
+		}
 	}
 
 	public static function userLogin($post)
