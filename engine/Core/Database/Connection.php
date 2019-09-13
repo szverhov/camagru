@@ -21,7 +21,7 @@ class Connection
 				$config['username'],
 				$config['password']
 			);
-			$this->_link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->_link->setAttribute(PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}

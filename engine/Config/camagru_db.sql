@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 06 2019 г., 23:56
+-- Время создания: Сен 13 2019 г., 10:17
 -- Версия сервера: 5.7.21
 -- Версия PHP: 7.1.16
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `userID` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `post`
@@ -51,7 +51,16 @@ INSERT INTO `post` (`id`, `imageName`, `imagePath`, `caption`, `userID`, `date`)
 (10, 'd6dde3803ac051c960fe01c3840fac5aea1e5083f5a7e78326d6c83b8230735ba29e0f14dd405e2fb1225b347a83fce6b4dff8daebf8c21d6adf46fd2949c811.png', '/files/userFiles/26/userPhotos/', 'daszxc', 26, '2019-09-06 08:26:22'),
 (11, 'b0191482c0445bdce64b0ed104df1d5837dd2d68cedbcb5323af6aeebfbbbbba5706f49d2e6945e96a9cf86eb89a31aeb493244776a91c72495b54bd8bea75f1.png', '/files/userFiles/26/userPhotos/', 'asdsadzxc', 26, '2019-09-06 08:27:18'),
 (12, 'd7c6fc1bc226a40d7936dcc6a9c7bc3f2875afa3cfde29c02326878eec10edcf6ac3d159b371a59a19ef542192f4cf824b79a3c1f95f4c9bc160468dfb3f7905.png', '/files/userFiles/26/userPhotos/', '', 26, '2019-09-06 08:29:47'),
-(13, '09b17dfc1ef440a31fad729dfe0371b760bcac072064806dd3a7dc66a0c6bdec13bb02a7924162fd64434389a25b4c7fe115217ab1322a87bc1e5f742e318045.png', '/files/userFiles/26/userPhotos/', 'csa cascas', 26, '2019-09-06 08:36:21');
+(14, 'c2416173e5751fabfcdbb9a48b637a26e0dfe0e7e63f60ff8ab6f471d3f4a6c3ebc23eaec2e426cb1bf860f1dbdf0fc5e2585c447f6847b3c83fa1be9bd73cd0.png', '/files/userFiles/26/userPhotos/', '', 26, '2019-09-07 10:02:07'),
+(16, 'f746d0d7b1139e3abd0c8377110b36a405f5a4ab192950a2c1ea38368d8012e24604ebffc00ecdc1b9b3d1df63612ad717ca6cb0c53aefb55f469dbaae416d81.png', '/files/userFiles/31/userPhotos/', '', 31, '2019-09-07 10:10:43'),
+(17, '22cfa11ad78206afa1b8b0161da5685368afdd503f95b4f3ef01cc44880eac0eb6d0ab52616e3f0284f969558bf995d0e09b3b486872425a09a1251ce33f9051.png', '/files/userFiles/31/userPhotos/', 'sad', 31, '2019-09-07 10:12:10'),
+(19, '35fae586ec5aafb0099246178ac1d30bcbd008d04d5b8eb5d95fbf147fa6302585be16200c6d50f91b360454370ab9b16b4016848890eae6b66237e77ce9f7c8.png', '/files/userFiles/26/userPhotos/', 'asdsad', 26, '2019-09-07 11:29:47'),
+(20, 'd3d16c25e6dcc2520ebd114c8a8126903fec3f353e9a9851ee16c173d2ed597afd54785fa98aabb5b274034b25b925cd619fe360b7954ee21261b5ce7f2771ef.png', '/files/userFiles/26/userPhotos/', 'asdz', 26, '2019-09-08 21:51:12'),
+(21, '56d338dc0b452049b565899411fddd01878cfcb40ff3d3f8d820bfe2df01a26b9d942ce1ca291283e36c3c3429314e5982dd30b8bde86e426123c759109fc1d8.png', '/files/userFiles/26/userPhotos/', 'ffsdf', 26, '2019-09-08 21:53:34'),
+(22, '1b22c1cd8f863aaa7d424acd955a6cada60d053afb60a01ba6cace68813c0a02afab55a42d4a7fa56f6f260f8786eda833c10f94d230f24d2d9222471ee6c990.png', '/files/userFiles/26/userPhotos/', 'gdfg', 26, '2019-09-08 21:55:09'),
+(23, 'e232d176f997323fc47b2f0746642626f24e59b62545deed8701b4834f1ab277f5a0951696f3d15d3c56fc301cabecdfd789eb932973bfb817310ea6003ef2d4.png', '/files/userFiles/26/userPhotos/', 'zxcqwe', 26, '2019-09-08 21:56:10'),
+(24, '677706bb6009c430e3382c730a7ef31764ab693f6c8830671bb2078e959e57c1160bfd1d3826c405b9ee573aa9d46d97bbe929dcb50f4765d9c4315432879014.png', '/files/userFiles/26/userPhotos/', 'asdasdzxc', 26, '2019-09-08 21:59:50'),
+(25, '97bce4c1b65248b5fbfa7a40163faef6f4c29e0a00d19bc1cd76e80ceadcf8c05af9a3959df6a7dc61caba1cd1138bc56e3662bbb15c59bab941dbecaf0c7533.png', '/files/userFiles/26/userPhotos/', 'asdsada', 26, '2019-09-08 22:08:41');
 
 -- --------------------------------------------------------
 
@@ -69,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `post_comment` (
   PRIMARY KEY (`id`),
   KEY `postID` (`postID`),
   KEY `userID` (`userID`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `post_comment`
@@ -95,7 +104,35 @@ INSERT INTO `post_comment` (`id`, `text`, `userID`, `postID`, `date`) VALUES
 (17, '&lt;script&gt;&lt;/script&gt;', 26, 3, '2019-08-27 21:49:26'),
 (18, 'ячсфів', 26, 8, '2019-08-28 12:27:33'),
 (19, 'zxc', 26, 3, '2019-09-06 08:20:55'),
-(20, 'asdasd', 26, 13, '2019-09-06 23:05:16');
+(20, 'asdasd', 26, 13, '2019-09-06 23:05:16'),
+(21, 'Здарова братишка', 26, 12, '2019-09-07 10:20:19'),
+(22, 'zasd', 31, 18, '2019-09-07 10:21:21'),
+(23, 'asd', 26, 18, '2019-09-07 10:21:26'),
+(24, 'asd', 26, 18, '2019-09-07 10:21:32'),
+(25, 'zxc', 26, 18, '2019-09-07 10:21:34'),
+(26, 'asd', 31, 18, '2019-09-07 10:22:44'),
+(27, 'zxc', 31, 18, '2019-09-07 10:22:53'),
+(28, 'Я батя', 31, 17, '2019-09-07 10:23:27'),
+(29, 'Я батя', 31, 14, '2019-09-07 10:23:37'),
+(30, 'azxc', 31, 14, '2019-09-07 10:25:56'),
+(31, 'коля батя', 31, 17, '2019-09-07 10:33:44'),
+(32, 'asdzxc', 31, 17, '2019-09-07 10:37:09'),
+(33, 'zxc', 26, 17, '2019-09-07 10:38:04'),
+(34, 'zxc', 31, 17, '2019-09-07 10:38:10'),
+(35, 'Комент славика', 31, 17, '2019-09-07 10:41:13'),
+(36, 'Комент коляна', 31, 17, '2019-09-07 10:41:35'),
+(37, 'Комент славика', 26, 17, '2019-09-07 10:41:45'),
+(38, 'Комент славика', 26, 17, '2019-09-07 10:41:55'),
+(39, 'Комент славика', 26, 17, '2019-09-07 10:43:19'),
+(40, 'asdasd', 26, 17, '2019-09-07 10:49:02'),
+(41, 'asdzx', 26, 17, '2019-09-07 10:49:12'),
+(42, 'zxcz', 31, 17, '2019-09-07 10:49:17'),
+(43, 'Привет колян!', 26, 17, '2019-09-07 10:55:28'),
+(44, 'А сейчас?', 26, 17, '2019-09-07 10:57:21'),
+(45, 'А сейчас в.2.0', 26, 17, '2019-09-07 10:57:56'),
+(46, 'asdaszx', 26, 17, '2019-09-08 20:42:16'),
+(47, 'xccz', 26, 22, '2019-09-08 21:55:19'),
+(48, 'fdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsdfdfsfsdsdsfdsfsdfsdfsdfsd', 26, 23, '2019-09-08 21:56:29');
 
 -- --------------------------------------------------------
 
@@ -120,7 +157,17 @@ INSERT INTO `post_like` (`userID`, `postID`) VALUES
 (26, 4),
 (26, 8),
 (26, 5),
-(26, 13);
+(26, 13),
+(26, 11),
+(31, 31),
+(31, 14),
+(26, 6),
+(31, 17),
+(26, 18),
+(26, 14),
+(26, 19),
+(26, 17),
+(26, 20);
 
 -- --------------------------------------------------------
 
@@ -143,18 +190,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп данных таблицы `user`
 --
 
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `access_level`, `confirm_hash`, `creation_date`, `last_login`, `alerts`, `notifications`) VALUES
-(26, 'szverhov', 'szverhov@gmail.com', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 1, '86983f596f5bbb668024080324cb42cf', '2019-07-14 21:25:01', NULL, 1, 1),
+(26, 'szverhov', 'szverhov@gmail.com', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 1, 'c971c5b4d3271fbf5e6deb9023c7c375', '2019-07-14 21:25:01', NULL, 1, 1),
 (27, 'asdasd', 'szverhov@gmail.cm', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 0, '39db6d9bf6ad26778c3300e84bb03381', '2019-09-06 10:57:51', NULL, 1, 1),
 (28, 'asd123', 'asd@asd.asd', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 0, '629992dc6f361c32ae018a0280b72aa3', '2019-09-06 11:03:49', NULL, 1, 1),
 (29, '321qwe', 'asd@asdz.zxc', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 0, '6056851a038058d45e6671de05496ba6', '2019-09-06 11:07:29', NULL, 1, 1),
-(30, '321qwes', 'asd@asdz.zxcs', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 0, '3f9c740c22a3a2ee2e5e310ebfbeaf0b', '2019-09-06 11:07:50', NULL, 1, 1);
+(30, '321qwes', 'asd@asdz.zxcs', '063ee9e7a22068123b32f2604679975dcb4fe096a715b784f7c605119d71e122f418a8e98dde4cb79ca528adee40efa2e7cd555c0ca386d2dc53a19408e2a71b', 0, '3f9c740c22a3a2ee2e5e310ebfbeaf0b', '2019-09-06 11:07:50', NULL, 1, 1),
+(31, 'Prostak', 'kondratiuk.nikolas@gmail.com', '48d7722b3c586e7eb2e64fcaf3eae8dc48d75d665bda550407dddf9b70a2fee63a02eeab72e4e6bb4f85ce9fe21fa7c02648f9f19813c57a42ab7de0b5f188f8', 1, NULL, '2019-09-07 12:49:31', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
